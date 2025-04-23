@@ -1,6 +1,10 @@
+import Controllers.BookController;
+import Models.Book;
+import Views.ShowConsole;
+
 public class App {
     public static void main(String[] args) throws Exception {
-
+        
         Book[] books = {
                 new Book("Clean Code", 2008),
                 new Book("The Pragmatic Programmer", 1999),
@@ -33,6 +37,39 @@ public class App {
                 new Book("Deep Learning", 2016),
                 new Book("The Elements of Statistical Learning", 2001)
         };
+
+        //INSTANCIAS
+
+        
+        ShowConsole mostrar = new ShowConsole();
+        BookController controlador = new BookController();
+
+        mostrar.ShowMessage("--ARREGLO ORIGINAL--");
+        System.out.println();
+        mostrar.PrintPersons(books);
+        System.out.println();
+
+        mostrar.ShowMessage("--ARREGLO ORDENADO DESCENDENTEMENTE");
+        System.out.println();
+        controlador.sortByName(books);
+        mostrar.PrintPersons(books);
+        System.out.println();
+        mostrar.ShowMessage("--Buscando The go programming language--");
+        Book libroBuscado = controlador.searchByName(books, "The go programming language");
+        if(libroBuscado == null){
+            mostrar.ShowMessage("El libro que busca no existe");
+        }else{
+            System.out.println(libroBuscado.toString());
+        }
+        mostrar.ShowMessage("--Buscando Python the best book--");
+        Book libroBuscado2 = controlador.searchByName(books, "--Python the best book--");
+        if(libroBuscado2 == null){
+            mostrar.ShowMessage("El libro que busca no existe");
+        }else{
+            System.out.println(libroBuscado2.toString());
+        }
+
+
 
     }
 }
